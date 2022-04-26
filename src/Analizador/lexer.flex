@@ -1,5 +1,5 @@
-/*Definir el paquete*/
-package analizador3;
+
+package Analizador;
 import java.util.ArrayList;
 %%
 %class Lexer
