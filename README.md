@@ -1,3 +1,3 @@
-## Analizadores léxico y sintáctico
+## Analizador léxico y sintáctico
 
 
