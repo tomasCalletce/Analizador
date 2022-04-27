@@ -1,40 +1,59 @@
-
 package Analizador;
 import java.util.ArrayList;
+import java_cup.runtime.*;
 %%
 %class Lexer
 %line
 %column
-
-// Se definen dos variables públicas
-
+%cup
 %{
-
 public String errlex="";
 public ArrayList<Token> ts = new ArrayList<Token>();
-
+public Symbol symbol(int type){
+return new Symbol(type,yyline,yycolumn);
+}
 %}
 
-// Alfabetos
-
-a= [a-zA-Z]
+a = [a-zA-Z]
 n = [0-9]
-s= "_"
-x = [\n\t\r ]
+espacio = [\n\t\r ]
+num = {n}+ ("."{n})?
+id = {a} ({a}|{n}|"_")*
+op = "+" | "-" | "*" |"/"
+or = "<" |"<="| ">="|"=="|"!="|">"
+ol = "|"|"&"
+asig = "="
+pc=";"
+c=","
+mientras = "Mientras"|"mientras"|"MIENTRAS"
+finmientras = "FinMientras"|"finmientras"|"FINMIENTRAS"|"Fin Mientras"|"fin mientras"
+hacer = "hacer"|"HACER"|"Hacer"
+tipo = "Entero"|"Real"
+inicio = "Programa"
+fin = "FinPrograma"
+leer = "Leer"
+escribir = "Escribir"
+comilla = "\""
 
-// Expresiones
-
-num="-"?{n}+
-real ="-"?{n}+"."{n}+
-id = {a}({a}|{n}|{s})*
-cad = "'"({a}|{n}|{s}|" ")* "'"
-com = "#" ({a}|{n}|{s}|" ")+
 %%
-
-{num}  {ts.add(new Token("Entero ",yytext()));}
-{real}  {ts.add(new Token("Real ",yytext()));}
-{id}  {ts.add(new Token("Identificador ",yytext()));}
-{cad}  {ts.add(new Token("Cadena ",yytext()));}
-{com} {}
-{x}  {}
-.  {errlex+=("\n Error Lexico, en linea : "+ (yyline+1)+" , "+(yycolumn+1)+ "caracter no valido "+yytext());}
+{mientras} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.mientras);}
+{inicio} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.inicio);}
+{fin} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.fin);}
+{hacer} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.hacer);}
+{escribir} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.escribir);}
+{leer} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.leer);}
+{finmientras} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.finmientras);}
+{tipo} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.tipo);}
+"(" {ts.add(new Token("P. Izquierdo ", yytext()));return symbol(sym.pi);}
+")" {ts.add(new Token("P. Derecho ", yytext()));return symbol(sym.pd);}
+{op} {ts.add(new Token("operador aritmético ", yytext()));return symbol(sym.op);}
+{ol} {ts.add(new Token("operador logico ", yytext()));return symbol(sym.ol);}
+{num} {ts.add(new Token("Numero ", yytext()));return symbol(sym.num);}
+{id} {ts.add(new Token("Identificador ", yytext()));return symbol(sym.id);}
+{or} {ts.add(new Token("Op. relacional ", yytext()));return symbol(sym.or);}
+{pc} {ts.add(new Token("punto y coma ", yytext()));return symbol(sym.pc);}
+{c} {ts.add(new Token("coma ", yytext()));return symbol(sym.c);}
+{comilla} {ts.add(new Token("comilla ", yytext()));return symbol(sym.comilla);}
+{asig} {ts.add(new Token("Asignación ", yytext()));return symbol(sym.asig);}
+{espacio} {}
+. {errlex+="\nError lexico: " + yytext() + " caracter no valido en pos: " + (yyline+1) + "," + (yycolumn+1);}

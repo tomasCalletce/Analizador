@@ -1,1 +1,9 @@
-(4+2)
+Programa 
+    Mientras (i<10) hacer
+    Entero a,b,g;
+
+    Leer a,g,s;
+    Escribir "hshs",s;
+
+    FinMientras
+FinPrograma
