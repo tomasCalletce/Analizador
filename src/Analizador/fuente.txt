@@ -1,9 +1,26 @@
 Programa 
     Mientras (i<10) hacer
     Entero a,b,g;
-
     Leer a,g,s;
     Escribir "hshs",s;
-
     FinMientras
+
+    Si (i<3)
+        Entonces
+            Real a,a;
+        Sino 
+            Real a,g;
+    FinSi
+
+    Para d = 4 Hasta 4 Paso 3
+         Real a,a;
+    FinPara
+
+    Segun d Hacer 
+        432: 
+        Real a,g;
+        412: 
+        Real a,g;
+    FinSegun
+    
 FinPrograma

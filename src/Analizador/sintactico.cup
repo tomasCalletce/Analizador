@@ -9,18 +9,28 @@ parser code {:
     }
 :};
 
-terminal num,id,pi,pd,ol,or,op,mientras,hacer,finmientras,asig,pc,tipo,c,inicio,fin,escribir,leer,comilla;
-non terminal E,T,EL,EA,I,IS,VA,L,K;
+terminal num,id,pi,pd,ol,or,op,mientras,hacer,finmientras,asig,pc,tipo,c,inicio,fin,escribir,leer,comilla,si,entonces,sino,finsi,para,hasta,finpara,paso,segun,deotromodo,finsegun,puntos;
+non terminal E,T,EL,EA,I,IS,VA,L,K,W;
 
 
-I::= inicio L fin;
-L::= mientras pi EL pd hacer IS finmientras;
+I::= inicio IS fin;
 IS::= L;
 IS::= L IS;
+L::= mientras pi EL pd hacer IS finmientras;
+L::= si pi EL pd entonces IS sino IS finsi;
+L::= si pi EL pd entonces IS finsi;
 L::= leer VA;
 L::= escribir K;
 L::= id asig EL pc;
 L::= tipo VA;
+L::= para id asig T hasta T paso T IS finpara;
+L::= para id asig T hasta T IS finpara;
+
+L::= segun id hacer T puntos IS W finsegun;
+W::= num puntos IS W;
+W::= num puntos IS;
+W::= deotromodo IS;
+
 K::=  id c K;
 K::=  comilla id comilla c K;
 K::=  id pc;

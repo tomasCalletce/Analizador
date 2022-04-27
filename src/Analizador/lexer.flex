@@ -34,6 +34,18 @@ fin = "FinPrograma"
 leer = "Leer"
 escribir = "Escribir"
 comilla = "\""
+si = "Si"
+entonces = "Entonces"
+sino = "Sino"
+finsi = "FinSi"
+para = "Para"
+hasta = "Hasta"
+finpara = "FinPara"
+paso = "Paso"
+segun = "Segun"
+finsegun = "FinSegun"
+deotromodo = "DeOtroModo"
+puntos=":"
 
 %%
 {mientras} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.mientras);}
@@ -44,6 +56,17 @@ comilla = "\""
 {leer} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.leer);}
 {finmientras} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.finmientras);}
 {tipo} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.tipo);}
+{si} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.si);}
+{entonces} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.entonces);}
+{sino} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.sino);}
+{finsi} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.finsi);}
+{hasta} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.hasta);}
+{para} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.para);}
+{finpara} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.finpara);}
+{paso} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.paso);}
+{finsegun} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.finsegun);}
+{deotromodo} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.deotromodo);}
+{segun} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.segun);}
 "(" {ts.add(new Token("P. Izquierdo ", yytext()));return symbol(sym.pi);}
 ")" {ts.add(new Token("P. Derecho ", yytext()));return symbol(sym.pd);}
 {op} {ts.add(new Token("operador aritmético ", yytext()));return symbol(sym.op);}
@@ -53,6 +76,7 @@ comilla = "\""
 {or} {ts.add(new Token("Op. relacional ", yytext()));return symbol(sym.or);}
 {pc} {ts.add(new Token("punto y coma ", yytext()));return symbol(sym.pc);}
 {c} {ts.add(new Token("coma ", yytext()));return symbol(sym.c);}
+{puntos} {ts.add(new Token("Puntos ", yytext()));return symbol(sym.puntos);}
 {comilla} {ts.add(new Token("comilla ", yytext()));return symbol(sym.comilla);}
 {asig} {ts.add(new Token("Asignación ", yytext()));return symbol(sym.asig);}
 {espacio} {}
