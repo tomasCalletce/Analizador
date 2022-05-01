@@ -8,6 +8,7 @@ public class App {
 
     
     public static void main(String[] args) {
+        
         // TODO code application logic here
         try {
             String ruta = "src/Analizador/fuente.txt";

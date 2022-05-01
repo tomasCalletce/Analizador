@@ -26,26 +26,29 @@ asig = "="
 pc=";"
 c=","
 mientras = "Mientras"|"mientras"|"MIENTRAS"
-finmientras = "FinMientras"|"finmientras"|"FINMIENTRAS"|"Fin Mientras"|"fin mientras"
+finmientras = "FinMientras"|"finmientras"|"FINMIENTRAS"|"Fin Mientras"|"fin mientras"|"finMientras"
 hacer = "hacer"|"HACER"|"Hacer"
 tipo = "Entero"|"Real"
 inicio = "Programa"
 fin = "FinPrograma"
-leer = "Leer"
-escribir = "Escribir"
-comilla = "\""
+leer = "Leer"|"leer"
+escribir = "Escribir"|"escribir"
 si = "Si"
 entonces = "Entonces"
-sino = "Sino"
-finsi = "FinSi"
-para = "Para"
-hasta = "Hasta"
-finpara = "FinPara"
-paso = "Paso"
-segun = "Segun"
-finsegun = "FinSegun"
-deotromodo = "DeOtroModo"
+sino = "Sino"|"sino"
+finsi = "FinSi"|"Finsi"|"Fin si"
+para = "Para"|"para"
+hasta = "Hasta"|"hasta"
+finpara = "FinPara"|"fin para"
+paso = "Paso"|"paso"
+segun = "Segun"|"segun"
+finsegun = "FinSegun"|"Fin Segun"
+deotromodo = "DeOtroModo"|"De Otro Modo"
+comilla = "\""|"”"|"“"
 puntos=":"
+alfa =  {comilla} ({a}|{n}|"_"|" "|{op}|{or}|{ol}|{asig})* {comilla}
+caso = "opcion_" {num} {puntos}
+
 
 %%
 {mientras} {ts.add(new Token("Palabra reservada ", yytext()));return symbol(sym.mientras);}
@@ -73,11 +76,12 @@ puntos=":"
 {ol} {ts.add(new Token("operador logico ", yytext()));return symbol(sym.ol);}
 {num} {ts.add(new Token("Numero ", yytext()));return symbol(sym.num);}
 {id} {ts.add(new Token("Identificador ", yytext()));return symbol(sym.id);}
+{alfa} {ts.add(new Token("Alfanumerico ", yytext()));return symbol(sym.alfa);}
 {or} {ts.add(new Token("Op. relacional ", yytext()));return symbol(sym.or);}
 {pc} {ts.add(new Token("punto y coma ", yytext()));return symbol(sym.pc);}
 {c} {ts.add(new Token("coma ", yytext()));return symbol(sym.c);}
-{puntos} {ts.add(new Token("Puntos ", yytext()));return symbol(sym.puntos);}
-{comilla} {ts.add(new Token("comilla ", yytext()));return symbol(sym.comilla);}
+{puntos} {ts.add(new Token("puntos ", yytext()));return symbol(sym.puntos);}
+{caso} {ts.add(new Token("Case ", yytext()));return symbol(sym.caso);}
 {asig} {ts.add(new Token("Asignación ", yytext()));return symbol(sym.asig);}
 {espacio} {}
 . {errlex+="\nError lexico: " + yytext() + " caracter no valido en pos: " + (yyline+1) + "," + (yycolumn+1);}
